@@ -1,8 +1,8 @@
 # react-prototype
 
-simple template for building prototypes.
+Simple template for building prototypes.
 
-comes bundled with the following libs:
+Comes bundled with the following libs:
 
 - [React](http://facebook.github.io/react/)
 - [flexboxgrid](http://flexboxgrid.com/)
