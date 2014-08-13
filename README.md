@@ -4,7 +4,7 @@ Simple template for building prototypes.
 
 Comes bundled with the following libs:
 
-- [React](http://facebook.github.io/react/)
+- [react](http://facebook.github.io/react/) + [react-router](https://github.com/rackt/react-router)
 - [flexboxgrid](http://flexboxgrid.com/)
 
 ## Install

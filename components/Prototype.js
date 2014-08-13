@@ -3,10 +3,17 @@
 'use strict';
 
 var React = require('react/addons');
-var master = require('../stylesheets/master.less');
+var Link = require('react-router/Link');
 
 module.exports = React.createClass({
   render: function() {
-    return <p>hello</p>
+    return (
+      <div>
+        <ul>
+          <li><Link to="example">Example</Link></li>
+        </ul>
+        <this.props.activeRouteHandler />
+      </div>
+    );
   }
 });
