@@ -13,14 +13,18 @@ module.exports = React.createClass({
   getInitialState: function() {
     var clicks = new Bacon.Bus();
 
-    var triples = clicks.bufferWithTime(delay)
-      .map('.length')
+    var buffered = clicks
+      .bufferWithTime(delay)
+      .map('.length');
+
+    var triples = buffered
       .filter(function(size) {
         return size >= 3;
       });
 
     return {
       clicks: clicks,
+      buffered: buffered,
       triples: triples
     };
   },
@@ -38,6 +42,7 @@ module.exports = React.createClass({
       <div>
         <button onClick={this.handleClick}>click</button>
         <StreamVis label="clicks" stream={this.state.clicks} />
+        <StreamVis label={`last ${delay}ms`} stream={this.state.buffered} />
         <StreamVis label="triple clicks" stream={this.state.triples} />
       </div>
     );
