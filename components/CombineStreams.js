@@ -17,12 +17,17 @@ module.exports = React.createClass({
 
     var ones = plusOnes.merge(minusOnes);
 
+    var value = ones.scan(0, function(total, a) {
+      return total + a;
+    });
+
     return {
       plusOneClick: plusOneClick,
       minusOneClick: minusOneClick,
       plusOnes: plusOnes,
       minusOnes: minusOnes,
-      ones: ones
+      ones: ones,
+      value: value
     };
   },
 
@@ -46,7 +51,8 @@ module.exports = React.createClass({
         <button onClick={this.handlePlusOneClick}>+1</button>
         <StreamVis label="-1" stream={this.state.minusOnes} />
         <StreamVis label="+1" stream={this.state.plusOnes} />
-        <StreamVis label="both" stream={this.state.ones} />
+        <StreamVis label="merged" stream={this.state.ones} />
+        <StreamVis label="sum" stream={this.state.value} />
       </div>
     );
   }
