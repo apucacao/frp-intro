@@ -17,11 +17,11 @@ var AsyncOperation = require('./components/AsyncOperation');
 React.renderComponent((
   <Routes>
     <Route handler={Prototype}>
-      <Route name="example-1" handler={CountClicks} />
-      <Route name="example-2" handler={CombineStreams} />
-      <Route name="example-3" handler={TransformStreams} />
-      <Route name="example-4" handler={TripleClicks} />
-      <Route name="example-5" handler={AsyncOperation} />
+      <Route name="count-clicks" handler={CountClicks} />
+      <Route name="combine-streams" handler={CombineStreams} />
+      <Route name="transform-streams" handler={TransformStreams} />
+      <Route name="triple-clicks" handler={TripleClicks} />
+      <Route name="async-op" handler={AsyncOperation} />
     </Route>
   </Routes>
 ), document.body);
