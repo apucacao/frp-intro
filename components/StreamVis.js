@@ -4,25 +4,27 @@
 
 require('../stylesheets/stream-vis.less');
 
+var _ = require('lodash');
 var React = require('react/addons');
 var Bacon = require('baconjs');
 var d3 = require('d3');
+var TimerMixin = require('./mixins/Timer');
 
-var now = new Date().valueOf();
-var scale = d3.scale.linear().range([0, 600]).domain([now - 10000, now]);
+var width = 600;
+var lifetime = 10000; // 10s
 
-var time = Bacon.fromPoll(1000 / 30, function() {
-  return new Bacon.Next(new Date().valueOf());
-});
-
-time.map(function(t) {
-  return [t - 10000, t];
-}).onValue(function(extent) {
-  return scale.domain(extent);
-});
+function prop(name) {
+  return function(d) {
+    return _.result(d, name);
+  };
+}
 
 module.exports = React.createClass({
+  mixins: [TimerMixin],
+
   componentDidMount: function() {
+    var now = new Date().valueOf();
+    var scale = d3.scale.linear().range([0, width]).domain([now - lifetime, now]);
     var chart = d3.select(this.refs.chart.getDOMNode());
 
     var events = [];
@@ -37,26 +39,26 @@ module.exports = React.createClass({
     stream.onValue(function(e) {
       setTimeout(function() {
         events.shift();
-      }, 10000);
+      }, lifetime);
 
       return events.push(e);
     });
 
     chart.append('svg:line').attr({
       x1: 0,
-      x2: 600,
+      x2: width,
       y1: 35,
       y2: 35
     });
 
-    time.onValue(function() {
+    this.timer.onValue(function(time) {
       var circles, labels;
+
+      scale.domain([time - lifetime, time])
 
       // circles 
 
-      circles = chart.selectAll('circle').data(events, function(d) {
-        return d.time;
-      });
+      circles = chart.selectAll('circle').data(events, prop('time'));
 
       circles.enter()
         .append('circle')
@@ -73,9 +75,7 @@ module.exports = React.createClass({
 
       // labels
       
-      labels = chart.selectAll('text').data(events, function(d) {
-        return d.time;
-      });
+      labels = chart.selectAll('text').data(events, prop('time'));
 
       labels.enter()
         .append('text')
