@@ -22,6 +22,10 @@ module.exports = React.createClass({
     };
   },
 
+  componentWillUnmount: function() {
+    this.state.words.end();
+  },
+
   handleClick: function(event) {
     this.state.words.push(event.target.innerHTML);
   },

@@ -28,6 +28,7 @@ module.exports = React.createClass({
 
   componentWillUnmount: function() {
     this.state.plusOneClick.end();
+    this.state.minusOneClick.end();
   },
 
   handlePlusOneClick: function(event) {
