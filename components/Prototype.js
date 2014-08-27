@@ -11,8 +11,8 @@ module.exports = React.createClass({
       <div>
         <h1>FRP Intro</h1>
         <ul>
-          <li><Link to="example">Example</Link></li>
-          <li><Link to="stream">Event stream</Link></li>
+          <li><Link to="example-1">Example 1: counting clicks</Link></li>
+          <li><Link to="example-2">Example 2: triple clicks</Link></li>
         </ul>
         <this.props.activeRouteHandler />
       </div>
