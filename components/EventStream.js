@@ -37,8 +37,8 @@ module.exports = React.createClass({
       <div>
         <button onClick={this.handleClick}>click</button>
         <StreamVis label="clicks" stream={this.state.clicks} />
-        <StreamVis label="values" stream={this.state.values} />
-        <StreamVis label="total" stream={this.state.counter} />
+        <StreamVis label=".map(1)" stream={this.state.values} />
+        <StreamVis label=".scan(0, sum)" stream={this.state.counter} />
       </div>
     );
   }
